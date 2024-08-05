@@ -46,6 +46,24 @@
             margin-bottom: 20px;
             text-align: center;
         }
+        .info {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        #share-icons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #share-icons img {
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+        }
+        #lotto-share {
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -56,6 +74,26 @@
     <p>클릭 한 번으로 1부터 45까지의 번호 중 6개의 랜덤 로또 번호를 손쉽게 생성하세요.</p>
     <button onclick="generateLottoNumbers()">번호 생성</button>
     <div class="balls-container" id="ballsContainer"></div>
+
+    <div class="info">
+        <p><strong>로또추첨시간</strong><br>
+        매주 토요일 20시 45분 MBC TV 방송채널에서 추첨합니다.</p>
+        <p><strong>로또번호생성기 가능시간</strong><br>
+        매주 토요일 20시에 이번 회차 번호생성이 종료되고, 일요일 00시 부터 다음 회차 번호를 생성할 수 있습니다.</p>
+    </div>
+
+    <div id="share-icons">
+        <a href="javascript:shareFacebook()"><img src="facebook_icon.png" alt="Facebook"></a>
+        <a href="javascript:shareTwitter()"><img src="twitter_icon.png" alt="Twitter"></a>
+        <a href="javascript:shareKakao()"><img src="kakao_icon.png" alt="KakaoTalk"></a>
+        <a href="javascript:shareTelegram()"><img src="telegram_icon.png" alt="Telegram"></a>
+        <a href="javascript:shareNaver()"><img src="naver_icon.png" alt="Naver"></a>
+        <a href="javascript:shareNaverBand()"><img src="naver_band_icon.png" alt="Naver Band"></a>
+    </div>
+
+    <div id="lotto-share">
+        <a href="javascript:shareLotto()"><button>로또번호 생성 공유하기</button></a>
+    </div>
 
     <script>
         function generateLottoNumbers() {
@@ -87,6 +125,47 @@
 
                 container.appendChild(setContainer);
             }
+        }
+
+        function shareFacebook() {
+            window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(location.href));
+        }
+
+        function shareTwitter() {
+            window.open("https://twitter.com/intent/tweet?url=" + encodeURIComponent(location.href) + "&text=" + document.title);
+        }
+
+        function shareKakao() {
+            Kakao.init('YOUR_KAKAO_APP_KEY');
+            Kakao.Link.createDefaultButton({
+                container: '#share-icons a:nth-child(3)',
+                objectType: 'feed',
+                content: {
+                    title: document.title,
+                    description: '페이지 설명',
+                    imageUrl: '이미지 URL',
+                    link: {
+                        mobileWebUrl: location.href,
+                        webUrl: location.href
+                    }
+                }
+            });
+        }
+
+        function shareTelegram() {
+            window.open("https://telegram.me/share/url?url=" + encodeURIComponent(location.href) + "&text=" + document.title);
+        }
+
+        function shareNaver() {
+            window.open("http://share.naver.com/web/shareView.nhn?url=" + encodeURIComponent(location.href) + "&title=" + document.title);
+        }
+
+        function shareNaverBand() {
+            window.open("https://band.us/plugin/share?body=" + encodeURIComponent(location.href) + "&route=" + encodeURIComponent(location.href));
+        }
+
+        function shareLotto() {
+            alert("로또번호 생성 및 공유하기 기능이 추가될 예정입니다.");
         }
     </script>
 </body>
